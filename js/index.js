@@ -1,9 +1,9 @@
 $(document).ready(function(){ 
 
  $("#botonazo").click(function() { 
-   $("#quote").fadeOut(150).delay(1500).fadeIn(1000);
-   $("#author").fadeOut(150).delay(1500).fadeIn(1000);
-});
+   $(".quote").fadeOut(150).delay(700).fadeIn(1000);
+  });
+
 });
 
 function getQuote() {
@@ -27,7 +27,7 @@ function getQuote() {
 }
 
   
-  function parseQuote(response)
+function parseQuote(response)
   {
     console.log('entro en parseQuote')
     document.getElementById("quote").innerHTML = response.quoteText;
@@ -35,3 +35,15 @@ function getQuote() {
     document.getElementById("author").innerHTML = '― ' + response.quoteAuthor;
     console.log(response.quoteAuthor);
   }
+
+
+function tweetIt() {
+
+  console.log('Entro en tweetIt');
+
+  var quote_encoded = encodeURIComponent(document.getElementById("quote").innerHTML);
+  var author_encoded = encodeURIComponent(document.getElementById("author").innerHTML+" ");
+
+  var myUrl = "https://twitter.com/intent/tweet"+"?text="+quote_encoded+author_encoded+"&via=musantro"+"&hashtags=LifeInQuotes"
+  window.open(myUrl,'_blank');
+}
